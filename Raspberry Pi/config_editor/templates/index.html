@@ -1,0 +1,62 @@
+{% extends "wrapper.html" %}
+
+{% block content %}
+    <table class="table">
+        <thead class="thead-light">
+        <tr>
+            <th scope="col">Mac-Address</th>
+            <th scope="col">Mqtt-topic</th>
+            <th scope="col"></th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for Mac_addres, Mqtt_topic, delete_link in bees_config %}
+            <tr>
+                <th scope="row">{{ Mac_addres }}</th>
+                <th scope="row">{{ Mqtt_topic }}</th>
+                <form class="form-inline" action="{{ delete_link }}" method="post">
+                    <th scope="row"><input type="submit" value="Удалить "></th>
+                </form>
+            </tr>
+        {% endfor %}
+        <tr>
+            <form class="form-inline" action="add_line?file=bees_config" method="post">
+                <td><input type="text" name="mac_address"></td>
+                <td><input type="text" name="mqtt_topic"></td>
+                <td><input type="submit" value="Добавить"></td>
+            </form>
+        </tr>
+        </tbody>
+        <table>
+
+            <table class="table">
+                <thead class="thead-light">
+                <tr>
+                    <th scope="col">Голосовая команда</th>
+                    <th scope="col">Mqtt-topic</th>
+                    <th scope="col">Действие</th>
+                    <th scope="col"></th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for token, topic, command, delete_link in token_config %}
+                    <tr>
+                        <th scope="row">{{ token }}</th>
+                        <th scope="row">{{ topic }}</th>
+                        <th scope="row">{{ command }}</th>
+                        <form class="form-inline" action="{{ delete_link }}" method="post">
+                            <th scope="row"><input type="submit" value="Удалить "></th>
+                        </form>
+                    </tr>
+                {% endfor %}
+                <tr>
+                    <form class="form-inline" action="add_line?file=token_config" method="post">
+                        <td><input type="text" name="token"></td>
+                        <td><input type="text" name="topic"></td>
+                        <td><input type="text" name="command"></td>
+                        <td><input type="submit" value="Добавить"></td>
+                    </form>
+                </tr>
+                </tbody>
+                <table>
+{% endblock %}

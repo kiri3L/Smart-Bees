@@ -12,3 +12,4 @@ urlpatterns = [
     path('subscribe/<str:gate>',subscription),
     path('config_editor/<str:gate>', config_editor)
 ]
+
